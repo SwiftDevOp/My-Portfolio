@@ -22,3 +22,16 @@ class Review_Section(models.Model):
     class Meta:
         verbose_name = 'Review'
         verbose_name_plural = 'Reviews'
+
+
+
+#Hero Section Background Images 
+class HeroBackgroundImage(models.Model):
+    image = models.ImageField(upload_to='hero-backgrounds/')
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return f"Hero Image {self.pk}"

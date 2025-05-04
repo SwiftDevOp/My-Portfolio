@@ -149,7 +149,7 @@ h6 {
   top: 0;
   left: -100%;
   bottom: 0;
-  background: color-mix(in srgb, var(--default-color), transparent 75%);
+  /* background: color-mix(in srgb, var(--default-color), transparent 75%); */
   width: 160px;
   transition: all 0.3s ease-in-out;
   z-index: 1000;
@@ -162,16 +162,18 @@ h6 {
 
 /* Hamburger Menu Button (Top Left) */
 .header-toggle {
-  position: fixed;
-  top: 15px;
-  left: 15px;
-  background-color: var(--accent-color);
+   background-color: var(--accent-color);
   color: white;
   font-size: 24px;
   padding: 10px;
   border-radius: 50%;
   cursor: pointer;
   z-index: 1100;
+
+  /* Remove fixed positioning */
+  position: relative;
+  top: auto;
+  left: auto;
 }
 
 /* Hover Effect for Hamburger */
@@ -212,6 +214,17 @@ h6 {
 .navbar-brand {
   font-size: 22px;
   font-weight: bold;
+}
+
+#mainNavbar {
+  transition: margin-top 0.3s ease;
+}
+
+
+.nap {
+  border-right: 10px;
+  border-style: solid;
+  border-color: var(--accent-color);
 }
 
 /* Navbar Hidden on Mobile (Except Brand) */
@@ -256,7 +269,7 @@ h6 {
   margin-bottom: 8px;
   font-size: 15px;
   border-radius: 50px;
-  background: color-mix(in srgb, var(--default-color), transparent 92%);
+  background: color-mix(in srgb, var(--default-color), transparent 72%);
   height: 56px;
   width: 100%;
   overflow: hidden;
@@ -551,6 +564,18 @@ section,
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
+.hero-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+  transition: background-image 1s ease-in-out;
+}
+
 .hero {
   width: 100%;
   min-height: 100vh;
@@ -559,6 +584,7 @@ section,
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .hero img {
@@ -1504,6 +1530,3 @@ section,
 /*--------------------------------------------------------------
 # Starter Section Section
 --------------------------------------------------------------*/
-.starter-section {
-  /* Add your styles here */
-}

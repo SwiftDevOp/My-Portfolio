@@ -6,13 +6,13 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Adebanji Emmanuel Portfolio</title>
+  <title>SwiftDevOps-AdebanjiEmmanuel</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
   <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
-  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+  <link href="{% static 'assets/img/big-favicon.png' %}" rel="favicon-icon">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -32,15 +32,22 @@
 </head>
 
 {% block content %}
-
-
-
-
+<div id="hero-slider" class="hero-slider">
+  <!-- The background images will be dynamically set by JavaScript -->
+</div>
 {% endblock %}
-
-
 <!-- Preloader -->
 <div id="preloader"></div>
+
+
+<script>
+  window.heroImages = [
+    {% for img in hero_images %}
+      "{{ img.image.url }}"{% if not forloop.last %},{% endif %}
+    {% endfor %}
+  ];
+</script>
+
 
 <!-- Vendor JS Files -->
 <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
@@ -53,6 +60,8 @@
 <script src="{% static 'assets/vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
 <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
 <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+
+
 
 <!-- Main JS File -->
 <script src="{% static 'assets/js/main.js' %}"></script>

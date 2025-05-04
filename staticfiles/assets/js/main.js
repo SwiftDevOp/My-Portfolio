@@ -230,12 +230,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
-
-
-
-
-
   /**
    * Navmenu Scrollspy
    */
@@ -259,4 +253,91 @@ document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener('scroll', navmenuScrollspy);
 
 })();
+
+
+/**
+ * hero-section slider
+ */
+const images = window.heroImages || [];
+
+let currentIndex = 0;
+const slider = document.getElementById("hero-slider");
+
+function adjustImageDimensions(imageUrl, callback) {
+  const img = new Image();
+  img.src = imageUrl;
+
+  img.onload = () => {
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+
+    // Set canvas dimensions to match the slider's dimensions
+    const sliderWidth = slider.offsetWidth;
+    const sliderHeight = slider.offsetHeight;
+
+    canvas.width = sliderWidth;
+    canvas.height = sliderHeight;
+
+    // Draw the image to fit the slider dimensions
+    ctx.drawImage(img, 0, 0, sliderWidth, sliderHeight);
+    callback(canvas.toDataURL("image/jpeg")); // Adjusted image
+  };
+
+  img.onerror = () => {
+    console.error(`Failed to load image: ${imageUrl}`);
+  };
+}
+
+function changeBackground() {
+  if (!slider || images.length === 0) return;
+
+  adjustImageDimensions(images[currentIndex], (adjustedImage) => {
+    slider.style.backgroundImage = `url('${adjustedImage}')`;
+    slider.style.backgroundSize = "cover"; // Ensure the image covers the slider
+    slider.style.backgroundPosition = "center"; // Center the image
+    currentIndex = (currentIndex + 1) % images.length;
+  });
+}
+
+changeBackground();
+setInterval(changeBackground, 5000); // Change image every 5 seconds
+
+// Update background on window resize to maintain responsiveness
+window.addEventListener("resize", changeBackground);
+
+
+console.log("Main.js loaded");
+
+
+
+/** Navbar Animation */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const navbar = document.getElementById("mainNavbar");
+  const navbarLinks = navbar.querySelectorAll("a, .navbar-brand"); // Select all links and brand text
+  const logo = navbar.querySelector("img"); // Select the logo image
+  const staticUrl = "/static/"; // Ensure static URL is set correctly
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY === 0) {
+      // At the very top of the page
+      navbar.classList.remove("mt-4", "border-animate");
+      navbar.style.borderRadius = "0px";
+      navbar.style.width = "100%"; // Reset width to full
+      navbar.style.margin = "0 auto"; // Center the navbar
+      navbar.style.backgroundColor = ""; // Reset to normal background color
+      navbarLinks.forEach(link => link.style.color = ""); // Reset text color
+      if (logo) logo.src = staticUrl + "assets/img/logo.png"; // Reset logo to original
+    } else {
+      // Scrolled down
+      navbar.classList.add("mt-4", "border-animate");
+      navbar.style.borderRadius = "40px";
+      navbar.style.width = "85%"; // Reduce width
+      navbar.style.margin = "0 auto"; // Keep it centered
+      navbar.style.setProperty("background-color", "#0563bb", "important"); // Change background color with !important
+      navbarLinks.forEach(link => link.style.color = "white"); // Force text color to white
+      if (logo) logo.src = staticUrl + "assets/img/white-logo.png"; // Change logo to white version
+    }
+  });
+});
 

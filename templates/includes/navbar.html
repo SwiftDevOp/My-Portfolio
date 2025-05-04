@@ -1,22 +1,27 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+{% load static %}
+
+<nav id="mainNavbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
     <div class="container d-flex justify-content-between">
         <!-- Navbar Brand (Always Visible) -->
-        <a class="navbar-brand fw-bold" href="index.html">SwiftDevOps</a>
+        <a class="navbar-brand fw-bold" href="index.html">
+            <img src="{% static 'assets/img/logo.png' %}" alt="Logo" class="logo" style="max-height: 30px; width: auto; margin-right: 10px;"> 
+            SwiftDevOps
+        </a>
   
         <!-- Mobile Hamburger (Visible Only on Mobile) -->
-        <div class="d-lg-none">
+        <div class="d-lg-none d-flex">
             <i class="bi bi-list header-toggle" id="menuToggle"></i>
         </div>
   
         <!-- Full Navbar (Hidden on Mobile) -->
         <div class="collapse navbar-collapse d-none d-lg-block" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="#hero">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-                <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
-                <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="#hero" style="border-right: 1px solid #ccc; padding-right: 20px;">Home</a></li>
+                <li class="nav-item"><a class="nav-link px-3" href="#about" style="border-right: 1px solid #ccc;">About</a></li>
+                <li class="nav-item"><a class="nav-link px-3" href="#skills" style="border-right: 1px solid #ccc;">Skills</a></li>
+                <li class="nav-item"><a class="nav-link px-3" href="#portfolio" style="border-right: 1px solid #ccc;">Portfolio</a></li>
+                <li class="nav-item"><a class="nav-link px-3" href="#services" style="border-right: 1px solid #ccc">Services</a></li>
+                <li class="nav-item"><a class="nav-link px-3" href="#contact">Contact</a></li>
             </ul>
         </div>
     </div>

@@ -209,6 +209,7 @@ h6 {
 /*--------------------------------------------------------------
 # Navigation Menu
 --------------------------------------------------------------*/
+
 .navbar-brand {
   font-size: 22px;
   font-weight: bold;
@@ -223,7 +224,7 @@ h6 {
 
 @media (max-width: 1199px) {
   .navbar-brand {
-    margin-left: 50px; /* Adjust this value as needed */
+    margin-left: -50px; /* Adjust this value as needed */
   }
 }
 
@@ -1504,6 +1505,3 @@ section,
 /*--------------------------------------------------------------
 # Starter Section Section
 --------------------------------------------------------------*/
-.starter-section {
-  /* Add your styles here */
-}

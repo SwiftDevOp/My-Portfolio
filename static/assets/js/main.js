@@ -260,3 +260,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
 })();
 
+
+
+
+// hero slider section
+document.addEventListener("DOMContentLoaded", function () {
+  const heroSlider = document.getElementById("hero-slider");
+
+  if (heroSlider && window.heroImages) {
+    window.heroImages.forEach((imageUrl) => {
+      const slide = document.createElement("div");
+      slide.className = "hero-slide";
+      slide.style.backgroundImage = `url(${imageUrl})`;
+      heroSlider.appendChild(slide);
+    });
+  }
+});
+
