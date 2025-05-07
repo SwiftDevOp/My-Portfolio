@@ -1,5 +1,8 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from cloudinary.models import CloudinaryField
+
+
 
 # Create your models here.
 class Review_Section(models.Model):
@@ -7,7 +10,7 @@ class Review_Section(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     designation = models.CharField(max_length=100)
-    photo = models.ImageField(upload_to='photos/%Y/%m/%d/')
+    photo = CloudinaryField('image')
     rating = models.IntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(5)],
         help_text="Rating (1 to 5 stars)"
@@ -27,7 +30,7 @@ class Review_Section(models.Model):
 
 #Hero Section Background Images 
 class HeroBackgroundImage(models.Model):
-    image = models.ImageField(upload_to='hero-backgrounds/')
+    image = CloudinaryField('image')
     order = models.PositiveIntegerField(default=0)
 
     class Meta:
