@@ -1,13 +1,17 @@
 from django.shortcuts import render
-from .models import Review_Section
-from .models import HeroBackgroundImage
+from .models import Review_Section, HeroBackgroundImage
 
-
-# Create your views here.
 def index(request):
     reviewss = Review_Section.objects.all()
     images = HeroBackgroundImage.objects.all()
-    return render(request, 'firstapp/index.html', {'reviewss': reviewss, 'hero_images': images})
+
+    # Generate secure URLs
+    hero_image_urls = [img.image.build_url(secure=True) for img in images]
+
+    return render(request, 'firstapp/index.html', {
+        'reviewss': reviewss,
+        'hero_images': hero_image_urls  # Pass only the URLs
+    })
 
 
 # hero-background-image
