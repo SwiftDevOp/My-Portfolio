@@ -11,6 +11,6 @@ def index(request):
 
 
 # hero-background-image
-def home(request):
-    images = HeroBackgroundImage.objects.all()
-    return render(request, 'templates/base.html', {'hero_images': images})
+# def home(request):
+#     images = HeroBackgroundImage.objects.all()
+#     return render(request, 'templates/base.html', {'hero_images': images})
