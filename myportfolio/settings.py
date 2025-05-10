@@ -114,7 +114,7 @@ if USE_CLOUDINARY:
     cloudinary.config( 
         cloud_name=os.getenv("CLOUD_NAME", "").strip(),
         api_key=os.getenv("API_KEY", "").strip(),
-        api_secret=os.getenv("API_SECRET", "").strip()
+        api_secret=os.getenv("API_SECRET", "").strip(),
         secure=True  # ← this forces https URLs
     )
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
