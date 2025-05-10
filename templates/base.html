@@ -43,7 +43,7 @@
 <script>
   window.heroImages = [
     {% for img in hero_images %}
-      "{{ img.image.url }}"{% if not forloop.last %},{% endif %}
+      "{{ img.image.build_url(secure=True) }}"{% if not forloop.last %},{% endif %}
     {% endfor %}
   ];
 </script>

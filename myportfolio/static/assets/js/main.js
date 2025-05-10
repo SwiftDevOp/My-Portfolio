@@ -265,6 +265,7 @@ const slider = document.getElementById("hero-slider");
 
 function adjustImageDimensions(imageUrl, callback) {
   const img = new Image();
+  img.crossOrigin = "anonymous";  // Fix added here
   img.src = imageUrl;
 
   img.onload = () => {
