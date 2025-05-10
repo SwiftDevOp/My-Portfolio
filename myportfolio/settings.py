@@ -10,20 +10,25 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+from dotenv import load_dotenv
 from pathlib import Path
 import os
-import dj_database_url
 
 
-# Optional: Import Cloudinary if using programmatic uploads
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Load .env file
+load_dotenv(dotenv_path=BASE_DIR / '.env')
+
+# Optional: Import Cloudinary if using programmatic uploads
+import dj_database_url
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -34,9 +39,16 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-)mlonhr@yqw23g(o2jk!u
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+# DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', "swiftdevops-website.onrender.com"]
+# ALLOWED_HOSTS = ['127.0.0.1', 'localhost', "swiftdevops-website.onrender.com"]
+
+
+# Read environment variables
+DEBUG = os.getenv("DEBUG", "True").lower() == "true"
+USE_CLOUDINARY = os.getenv("USE_CLOUDINARY", "False").lower() == "true"
+
+
 
 
 # Application definition
@@ -85,8 +97,6 @@ WSGI_APPLICATION = 'myportfolio.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
 if not DEBUG:
     DATABASES = {
         'default': dj_database_url.config(
@@ -94,8 +104,6 @@ if not DEBUG:
         )
     }
 else:
-    # For local development, use SQLite or your preferred database
-
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -103,22 +111,19 @@ else:
         }
     }
 
-# Cloudinary Storage - Only use in production
-if not DEBUG:
+# Cloudinary setup
+if USE_CLOUDINARY:
+    cloudinary.config( 
+        cloud_name=os.getenv("CLOUD_NAME", "").strip(),
+        api_key=os.getenv("API_KEY", "").strip(),
+        api_secret=os.getenv("API_SECRET", "").strip()
+    )
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-
-# Cloudinary configuration
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.environ.get('CLOUD_NAME'),
-    'API_KEY': os.environ.get('API_KEY'),
-    'API_SECRET': os.environ.get('API_SECRET'),
-}
-
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
-
-
+    print("Cloudinary config loaded:")
+    print("  CLOUD_NAME:", os.getenv("CLOUD_NAME"))
+    print("  API_KEY:", os.getenv("API_KEY"))
+    print("  API_SECRET:", os.getenv("API_SECRET"))
 
 
 # Password validation
