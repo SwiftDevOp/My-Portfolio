@@ -39,13 +39,11 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-)mlonhr@yqw23g(o2jk!u
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+DEBUG = os.getenv("DEBUG", "True").lower() == "true"
 
-# ALLOWED_HOSTS = ['127.0.0.1', 'localhost', "swiftdevops-website.onrender.com"]
-
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', "swiftdevops-website.onrender.com"]
 
 # Read environment variables
-DEBUG = os.getenv("DEBUG", "True").lower() == "true"
 USE_CLOUDINARY = os.getenv("USE_CLOUDINARY", "False").lower() == "true"
 
 
