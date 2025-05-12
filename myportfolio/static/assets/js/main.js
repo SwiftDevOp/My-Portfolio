@@ -278,7 +278,17 @@ changeBackground();
 setInterval(changeBackground, 5000); // Change image every 5 seconds
 
 // Update background on window resize to maintain responsiveness
-window.addEventListener("resize", changeBackground);
+let resizeTimeout;
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(changeBackground, 200);
+});
+
+images.forEach((src) => {
+  const img = new Image();
+  img.crossOrigin = "anonymous";
+  img.src = src;
+});
 
 
 console.log("Main.js loaded");

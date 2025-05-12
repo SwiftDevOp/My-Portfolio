@@ -42,10 +42,10 @@
 
 <script>
   window.heroImages = [
-    {% for img in hero_images %}
-      "{{ img }}"{% if not forloop.last %},{% endif %}
-    {% endfor %}
-  ];
+  {% for img in hero_images %}
+    "{{ img.url }}"{% if not forloop.last %},{% endif %}
+  {% endfor %}
+];
 </script>
 
 
