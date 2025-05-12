@@ -259,45 +259,19 @@ document.addEventListener("DOMContentLoaded", function () {
  * hero-section slider
  */
 const images = window.heroImages || [];
-
 let currentIndex = 0;
 const slider = document.getElementById("hero-slider");
-
-function adjustImageDimensions(imageUrl, callback) {
-  const img = new Image();
-  img.crossOrigin = "anonymous";  // Fix added here
-  img.src = imageUrl;
-
-  img.onload = () => {
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-
-    // Set canvas dimensions to match the slider's dimensions
-    const sliderWidth = slider.offsetWidth;
-    const sliderHeight = slider.offsetHeight;
-
-    canvas.width = sliderWidth;
-    canvas.height = sliderHeight;
-
-    // Draw the image to fit the slider dimensions
-    ctx.drawImage(img, 0, 0, sliderWidth, sliderHeight);
-    callback(canvas.toDataURL("image/jpeg")); // Adjusted image
-  };
-
-  img.onerror = () => {
-    console.error(`Failed to load image: ${imageUrl}`);
-  };
-}
 
 function changeBackground() {
   if (!slider || images.length === 0) return;
 
-  adjustImageDimensions(images[currentIndex], (adjustedImage) => {
-    slider.style.backgroundImage = `url('${adjustedImage}')`;
-    slider.style.backgroundSize = "cover"; // Ensure the image covers the slider
-    slider.style.backgroundPosition = "center"; // Center the image
-    currentIndex = (currentIndex + 1) % images.length;
-  });
+  const imageUrl = images[currentIndex];
+  slider.style.backgroundImage = `url('${imageUrl}')`;
+  slider.style.backgroundSize = "cover";
+  slider.style.backgroundPosition = "center";
+  slider.style.transition = "background-image 0.5s ease-in-out";
+
+  currentIndex = (currentIndex + 1) % images.length;
 }
 
 changeBackground();
