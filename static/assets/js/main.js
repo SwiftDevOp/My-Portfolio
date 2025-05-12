@@ -264,16 +264,41 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // hero slider section
-document.addEventListener("DOMContentLoaded", function () {
-  const heroSlider = document.getElementById("hero-slider");
+/**
+ * hero-section slider
+ */
+const images = window.heroImages || [];
+let currentIndex = 0;
+const slider = document.getElementById("hero-slider");
 
-  if (heroSlider && window.heroImages) {
-    window.heroImages.forEach((imageUrl) => {
-      const slide = document.createElement("div");
-      slide.className = "hero-slide";
-      slide.style.backgroundImage = `url(${imageUrl})`;
-      heroSlider.appendChild(slide);
-    });
-  }
+function changeBackground() {
+  if (!slider || images.length === 0) return;
+
+  const imageUrl = images[currentIndex];
+  slider.style.backgroundImage = `url('${imageUrl}')`;
+  slider.style.backgroundSize = "cover";
+  slider.style.backgroundPosition = "center";
+  slider.style.transition = "background-image 0.5s ease-in-out";
+
+  currentIndex = (currentIndex + 1) % images.length;
+}
+
+changeBackground();
+setInterval(changeBackground, 5000); // Change image every 5 seconds
+
+// Update background on window resize to maintain responsiveness
+let resizeTimeout;
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(changeBackground, 200);
 });
+
+images.forEach((src) => {
+  const img = new Image();
+  img.crossOrigin = "anonymous";
+  img.src = src;
+});
+
+
+console.log("Main.js loaded");
 
