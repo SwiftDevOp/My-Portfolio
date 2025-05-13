@@ -326,3 +326,55 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+
+// Landing Page Contact Form
+
+  document.getElementById('contact-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    
+    const form = e.target;
+    const data = new FormData(form);
+    const statusEl = document.getElementById('form-status');
+    const submitBtn = document.getElementById('submit-btn');
+    const btnText = document.getElementById('btn-text');
+    const btnSpinner = document.getElementById('btn-spinner');
+
+    // Prepare UI
+    statusEl.classList.remove('hidden');
+    statusEl.textContent = "";
+    submitBtn.disabled = true;
+    btnText.textContent = "Sending...";
+    btnSpinner.classList.remove('hidden');
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        statusEl.textContent = "Message sent successfully!";
+        statusEl.style.color = "green";
+        form.reset();
+      } else {
+        const result = await response.json();
+        statusEl.textContent = result.errors ? result.errors.map(e => e.message).join(", ") : "Oops! Something went wrong.";
+        statusEl.style.color = "red";
+      }
+    } catch (error) {
+      statusEl.textContent = "Network error. Please try again.";
+      statusEl.style.color = "red";
+    }
+
+    // Restore UI
+    setTimeout(() => {
+      statusEl.classList.add('hidden');
+    }, 5000);
+
+    submitBtn.disabled = false;
+    btnText.textContent = "Send Message";
+    btnSpinner.classList.add('hidden');
+  });
