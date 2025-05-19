@@ -299,6 +299,7 @@ console.log("Main.js loaded");
 
 document.addEventListener("DOMContentLoaded", () => {
   const navbar = document.getElementById("mainNavbar");
+  const hamburger = document.getElementById("menuToggle");
   const navbarLinks = navbar.querySelectorAll("a, .navbar-brand"); // Select all links and brand text
   const logo = navbar.querySelector("img"); // Select the logo image
   const staticUrl = "/static/"; // Ensure static URL is set correctly
@@ -311,6 +312,7 @@ document.addEventListener("DOMContentLoaded", () => {
       navbar.style.width = "100%"; // Reset width to full
       navbar.style.margin = "0 auto"; // Center the navbar
       navbar.style.backgroundColor = ""; // Reset to normal background color
+      hamburger.style.color = ""; // Reset hamburger color
       navbarLinks.forEach(link => link.style.color = ""); // Reset text color
       if (logo) logo.src = staticUrl + "assets/img/logo.png"; // Reset logo to original
     } else {
@@ -320,6 +322,7 @@ document.addEventListener("DOMContentLoaded", () => {
       navbar.style.width = "85%"; // Reduce width
       navbar.style.margin = "0 auto"; // Keep it centered
       navbar.style.setProperty("background-color", "#0563bb", "important"); // Change background color with !important
+      hamburger.style.setProperty("color", "white", "important"); // Change hamburger color with !important
       navbarLinks.forEach(link => link.style.color = "white"); // Force text color to white
       if (logo) logo.src = staticUrl + "assets/img/white-logo.png"; // Change logo to white version
     }

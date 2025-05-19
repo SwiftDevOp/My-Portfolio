@@ -202,8 +202,8 @@ h6 {
 
 /* Hamburger Menu Button (Top Left) */
 .header-toggle {
-   background-color: var(--accent-color);
-  color: white;
+   /* background-color: var(--accent-color); */
+  color: #0563bb;
   font-size: 24px;
   padding: 10px;
   border-radius: 50%;
@@ -217,9 +217,9 @@ h6 {
 }
 
 /* Hover Effect for Hamburger */
-.header-toggle:hover {
+/* .header-toggle:hover {
   background-color: color-mix(in srgb, var(--accent-color) 90%, white 15%);
-}
+} */
 
 /* Ensure Navmenu is visible on Desktop */
 @media (min-width: 1200px) {
